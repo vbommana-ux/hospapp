@@ -6,6 +6,7 @@ import {
   View,
   Grid,
   Divider,
+  TextField,
 } from "@aws-amplify/ui-react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
@@ -23,6 +24,8 @@ const client = generateClient({
 
 export default function App() {
   const [userprofiles, setUserProfiles] = useState([]);
+  const [patientName, setPatientName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const { signOut } = useAuthenticator((context) => [context.user]);
 
   useEffect(() => {
@@ -33,6 +36,12 @@ export default function App() {
     const { data: profiles } = await client.models.UserProfile.list();
     setUserProfiles(profiles);
   }
+
+  const handleSave = () => {
+    console.log("Patient Name:", patientName);
+    console.log("Phone Number:", phoneNumber);
+    // Add logic to save patientName and phoneNumber
+  };
 
   return (
     <Flex
@@ -72,6 +81,21 @@ export default function App() {
           </Flex>
         ))}
       </Grid>
+
+      <Flex direction="column" gap="1rem" width="100%">
+        <TextField
+          label="Patient Name"
+          value={patientName}
+          onChange={(e) => setPatientName(e.target.value)}
+        />
+        <TextField
+          label="Phone Number"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+        <Button onClick={handleSave}>Save</Button>
+      </Flex>
+
       <Button onClick={signOut}>Sign Out</Button>
     </Flex>
   );
