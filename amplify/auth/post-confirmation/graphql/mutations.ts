@@ -15,7 +15,7 @@ export const createUserProfile = /* GraphQL */ `mutation CreateUserProfile(
   createUserProfile(condition: $condition, input: $input) {
     createdAt
     email
-    id: ID!
+    id: ID
     profileOwner
     updatedAt
     __typename
