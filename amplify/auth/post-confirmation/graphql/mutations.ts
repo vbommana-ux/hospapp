@@ -15,7 +15,7 @@ export const createUserProfile = /* GraphQL */ `mutation CreateUserProfile(
   createUserProfile(condition: $condition, input: $input) {
     createdAt
     email
-    id
+    id: ID!
     profileOwner
     updatedAt
     __typename
@@ -58,4 +58,21 @@ export const updateUserProfile = /* GraphQL */ `mutation UpdateUserProfile(
 ` as GeneratedMutation<
   APITypes.UpdateUserProfileMutationVariables,
   APITypes.UpdateUserProfileMutation
+>;
+export const createPatientProfile = /* GraphQL */ `mutation CreatePatientProfile(
+$condition: $ModelUserProfileConditionInput)
+$input: CreatePatientProfile!
+) {
+createUserProfile(condition: $condition, input: $input) {
+    createdAt
+    email
+    id
+    profileOwner
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateUserProfileMutationVariables,
+  APITypes.CreateUserProfileMutation
 >;
